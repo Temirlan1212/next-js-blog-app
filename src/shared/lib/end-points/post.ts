@@ -2,7 +2,7 @@ export interface GetPostsParams {
   page?: number;
   perPage?: number;
   search?: {
-    field: string;
+    fields: string[];
     value: string;
   };
 }
@@ -10,7 +10,7 @@ export interface GetPostsParams {
 const postEndPoints = {
   getPosts: ({ perPage, page, search }: GetPostsParams): string => {
     const params = [];
-    const isSearch = search && search.field && search.value;
+    const isSearch = search && search.fields && search.value;
 
     if (perPage && page && !isSearch) {
       const start = (page - 1) * perPage;
@@ -22,10 +22,10 @@ const postEndPoints = {
     }
 
     if (isSearch) {
-      params.push(
-        `${encodeURIComponent(search.field)}=${encodeURIComponent(
-          search.value
-        )}`
+      search.fields.map((field) =>
+        params.push(
+          `${encodeURIComponent(field)}=${encodeURIComponent(search.value)}`
+        )
       );
     }
 

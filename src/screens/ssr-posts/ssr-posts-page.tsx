@@ -14,7 +14,7 @@ export default async function Posts({ searchParams }: PostsProps) {
   const { posts, totalPosts } = await postServices.getPosts({
     page: currentPage,
     perPage: postsPerPage,
-    search: { field: "title", value: searchValue },
+    search: { fields: ["title_like"], value: searchValue },
   });
 
   return (
