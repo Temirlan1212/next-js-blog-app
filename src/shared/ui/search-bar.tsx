@@ -55,7 +55,7 @@ export function SearchBar({
         {loading && (
           <Button
             variant={"ghost"}
-            className="absolute top-[1px] right-1 w-[5px] h-[94%] bg-white opacity-1"
+            className="absolute top-[1px] right-1 w-[5px] h-[94%] bg-background opacity-1"
             loading={loading}
             disabled={false}
           />

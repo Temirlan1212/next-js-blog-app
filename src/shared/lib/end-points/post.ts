@@ -1,11 +1,12 @@
-export interface GetPostsParams {
-  page?: number;
-  perPage?: number;
-  search?: {
+export interface PostParams {
+  page: number;
+  perPage: number;
+  search: {
     fields: string[];
     value: string;
   };
 }
+export interface GetPostsParams extends Partial<PostParams> {}
 
 const postEndPoints = {
   getPosts: ({ perPage, page, search }: GetPostsParams): string => {
