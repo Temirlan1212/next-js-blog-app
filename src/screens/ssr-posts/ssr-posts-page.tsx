@@ -1,7 +1,7 @@
 import { postServices } from "@/entities/post/api/services";
-import { PostsList } from "./posts-list";
+import { PostsList } from "@/widgets/posts-list";
 import { PaginationWithLinks } from "@/ui/pagination-with-links";
-import { SearchWithLinks } from "../../shared/ui/search-with-links";
+import { SearchWithLinks } from "@/ui/search-with-links";
 
 interface PostsProps {
   searchParams: { [key: string]: string | undefined };

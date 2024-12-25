@@ -5,7 +5,7 @@ import { cn } from "@/shared/lib/classnames";
 import { ThemeProvider } from "./providers/theme-provider";
 import { Toaster } from "@/shared/ui/toaster";
 import { ReactQueryProvider } from "./providers/react-query-provider";
-import { NextTopLoader } from "./widgets/next-top-loader";
+import { NextTopLoader } from "../widgets/next-top-loader";
 
 const inter = Inter({ subsets: ["latin"] });
 

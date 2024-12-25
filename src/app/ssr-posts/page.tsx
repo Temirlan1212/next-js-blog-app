@@ -1,4 +1,4 @@
-import { PostsPage } from "@/screens/posts";
+import { SsrPostsPage } from "@/screens/ssr-posts";
 
 const fakeRequest = (data: any) => {
   return new Promise((resolve) => {
@@ -20,5 +20,5 @@ interface Props {
 export default async function Page({ searchParams }: Props) {
   await fakeRequest({ success: true, message: "Fake request completed" });
 
-  return <PostsPage searchParams={searchParams} />;
+  return <SsrPostsPage searchParams={searchParams} />;
 }
