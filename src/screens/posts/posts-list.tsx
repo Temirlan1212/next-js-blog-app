@@ -11,7 +11,7 @@ export function PostsList({ posts }: PostsListProps) {
       {posts.map((post) => (
         <Card key={post.id}>
           <CardHeader>
-            <CardTitle>{`${post.title} (post ${post.id})`}</CardTitle>
+            <CardTitle>{post.title}</CardTitle>
           </CardHeader>
           <CardContent>{post.body}</CardContent>
         </Card>

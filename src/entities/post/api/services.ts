@@ -9,13 +9,8 @@ export type GetPostsReturnType = {
   error: Error | null;
 };
 
-async function getPosts({
-  page,
-  perPage,
-}: GetPostsParams): Promise<GetPostsReturnType> {
-  const res = await api.json<Post[]>(
-    API_END_POINTS.post.getPosts({ page, perPage })
-  );
+async function getPosts(params: GetPostsParams): Promise<GetPostsReturnType> {
+  const res = await api.json<Post[]>(API_END_POINTS.post.getPosts(params));
 
   if (res.ok) {
     const posts = res.result;
