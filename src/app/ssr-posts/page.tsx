@@ -9,8 +9,8 @@ const fakeRequest = (data: any) => {
 };
 
 export const metadata = {
-  title: "Posts",
-  description: "Posts",
+  title: "SSR Posts",
+  description: "SSR Posts",
 };
 
 interface Props {
