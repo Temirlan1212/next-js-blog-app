@@ -1,8 +1,8 @@
 export const metadata = {
-  title: "Blog app",
-  description: "Blog app",
+  title: "Home page",
+  description: "Home page",
 };
 
-export default function Page() {
+export default async function Page() {
   return <>Home</>;
 }

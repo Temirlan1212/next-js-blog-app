@@ -8,8 +8,8 @@ import { Toaster } from "@/shared/ui/toaster";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Shadcn - Landing template",
-  description: "Landing template from Shadcn",
+  title: "JSONplaceholder posts app",
+  description: "SONplaceholder posts app - demo",
 };
 
 export default function RootLayout({
@@ -26,7 +26,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <div className="max-w-4xl mx-auto">{children}</div>
           <Toaster />
         </ThemeProvider>
       </body>
