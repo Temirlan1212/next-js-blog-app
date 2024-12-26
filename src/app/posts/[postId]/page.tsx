@@ -5,6 +5,7 @@ import {
   GetPostCommentsParams,
   GetPostParams,
 } from "@/shared/lib/end-points/post";
+import { paths } from "@/shared/routing";
 
 interface Props {
   params: GetPostParams | GetPostCommentsParams;
@@ -20,7 +21,7 @@ export const generateMetadata = async ({ params }: Props) => {
     openGraph: {
       title: post.title,
       description: post.body,
-      url: `${process.env.NEXT_PUBLIC_URL}/posts/${postId}`,
+      url: `${process.env.NEXT_PUBLIC_BASE_URL}${paths.post({ postId })}`,
       type: "article",
     },
     twitter: {
