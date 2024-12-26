@@ -21,39 +21,47 @@ export interface ComponentProps extends HTMLAttributes<HTMLElement> {}
 
 export default function Component({ className, ...rest }: ComponentProps) {
   return (
-    <div>
-      <CardTitle>
-        Posts carousel with{" "}
-        <a
-          target="_blank"
-          href="https://tanstack.com/query/v5/docs/framework/react/overview"
-          className="underline cursor-pointer hover:text-primary"
-        >
-          react-query
-        </a>
-      </CardTitle>
+    <>
+      <h1 className="text-4xl text-center sr-only">
+        Welcome to Next js blog post app
+      </h1>
 
-      <Separator className="my-5" />
-
-      <PostsCarousel />
-
-      <div className="flex items-center justify-between mt-16">
-        <CardTitle>Recent 20 posts</CardTitle>
-        <Link href={paths.csrPosts}>
-          <Button
-            className="group"
-            rightIcon={
-              <ArrowRight className="size-5 ml-2 group-hover/arrow:translate-x-1 transition-transform" />
-            }
+      <section>
+        <CardTitle>
+          Posts carousel with{" "}
+          <a
+            target="_blank"
+            href="https://tanstack.com/query/v5/docs/framework/react/overview"
+            className="underline cursor-pointer hover:text-primary"
           >
-            See all
-          </Button>
-        </Link>
-      </div>
+            react-query
+          </a>
+        </CardTitle>
 
-      <Separator className="my-5" />
+        <Separator className="my-5" />
 
-      <RecentPosts params={{ perPage: 20, page: 1 }} />
-    </div>
+        <PostsCarousel />
+      </section>
+
+      <section className="mt-16">
+        <div className="flex items-center justify-between mt-16">
+          <CardTitle>Recent 20 posts</CardTitle>
+          <Link href={paths.csrPosts}>
+            <Button
+              className="group"
+              rightIcon={
+                <ArrowRight className="size-5 ml-2 group-hover/arrow:translate-x-1 transition-transform" />
+              }
+            >
+              See all
+            </Button>
+          </Link>
+        </div>
+
+        <Separator className="my-5" />
+
+        <RecentPosts params={{ perPage: 20, page: 1 }} />
+      </section>
+    </>
   );
 }
