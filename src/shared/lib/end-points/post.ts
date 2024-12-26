@@ -1,3 +1,5 @@
+import { PathsPostParams } from "@/shared/routing";
+
 export interface PostParams {
   page: number;
   perPage: number;
@@ -6,11 +8,10 @@ export interface PostParams {
     value: string;
   };
 }
+
 export interface GetPostsParams extends Partial<PostParams> {}
 
-export interface GetPostParams {
-  postId: number;
-}
+export interface GetPostParams extends PathsPostParams {}
 
 export interface GetPostCommentsParams extends GetPostParams {}
 
