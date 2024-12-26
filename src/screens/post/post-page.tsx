@@ -11,28 +11,30 @@ interface PostsProps {
   user: User;
 }
 
-export default async function Posts({ post, comments, user }: PostsProps) {
+export default async function PostPage(props: PostsProps) {
   return (
-    <div>
-      <h1 className="text-3xl font-bold mb-6 truncate">Post {post.title}</h1>
+    <article>
+      <h1 className="text-3xl font-bold mb-6 truncate">
+        Post {props.post.title}
+      </h1>
 
       <CardTitle className="mt-7">Blog</CardTitle>
 
       <div className="border-b my-5" />
 
-      <PostCard post={post} />
+      <PostCard post={props.post} />
 
       <CardTitle className="mt-7">Author</CardTitle>
 
       <div className="border-b my-5" />
 
-      <UserCard user={user} />
+      <UserCard user={props.user} />
 
       <CardTitle className="mt-7">Comments</CardTitle>
 
       <div className="border-b my-5" />
 
-      <PostCommentsList postComments={comments} />
-    </div>
+      <PostCommentsList postComments={props.comments} />
+    </article>
   );
 }
