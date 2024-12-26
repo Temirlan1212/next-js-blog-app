@@ -13,6 +13,9 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "JSONplaceholder posts app",
   description: "SONplaceholder posts app - demo",
+  icons: {
+    icon: "/icons/logo.svg",
+  },
 };
 
 export default function RootLayout({
