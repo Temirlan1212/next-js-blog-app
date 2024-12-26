@@ -8,8 +8,14 @@ import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { paths } from "@/shared/routing";
 
-const PostsCarousel = dynamic(() => import("./posts-carousel"));
-const RecentPosts = dynamic(() => import("./recent-posts"));
+const PostsCarousel = dynamic(() => import("./posts-carousel"), {
+  ssr: false,
+  loading: ({ isLoading }) => (isLoading ? <div> loading..</div> : null),
+});
+const RecentPosts = dynamic(() => import("./recent-posts"), {
+  ssr: false,
+  loading: ({ isLoading }) => (isLoading ? <div> loading..</div> : null),
+});
 
 export interface ComponentProps extends HTMLAttributes<HTMLElement> {}
 
