@@ -1,21 +1,23 @@
-import { postServices } from "@/entities/post/api/services";
-import { GetPostParams } from "@/shared/lib/end-points/post";
+import { Post, PostComment } from "@/entities/post/types";
+import { CardTitle } from "@/shared/ui/card";
 import { PostCard } from "@/widgets/post-card";
+import { PostCommentsList } from "@/widgets/post-comments-list";
 
 interface PostsProps {
-  params: GetPostParams;
+  post: Post;
+  comments: PostComment[];
 }
 
-export default async function Posts({ params }: PostsProps) {
-  const postId = parseInt((params?.postId as unknown as string) || "0");
-  const { post } = await postServices.getPost({
-    postId,
-  });
-
+export default async function Posts({ post, comments }: PostsProps) {
   return (
     <div className="my-8">
       <h1 className="text-3xl font-bold mb-6 truncate">Post {post.title}</h1>
       <PostCard post={post} />
+
+      <CardTitle className="mt-7">Comments</CardTitle>
+
+      <div className="border-b my-5" />
+      <PostCommentsList postComments={comments} />
     </div>
   );
 }

@@ -1,7 +1,11 @@
 import { api } from "@/shared/lib/api";
-import { Post } from "../types";
+import { Post, PostComment } from "../types";
 import { API_END_POINTS } from "@/shared/lib/end-points";
-import { GetPostParams, GetPostsParams } from "@/shared/lib/end-points/post";
+import {
+  GetPostCommentsParams,
+  GetPostParams,
+  GetPostsParams,
+} from "@/shared/lib/end-points/post";
 import { postMappers } from "../lib/mappers";
 
 export type GetPostsReturnType = {
@@ -12,6 +16,11 @@ export type GetPostsReturnType = {
 
 export type GetPostReturnType = {
   post: Post;
+  error: Error | null;
+};
+
+export type GetPostCommentsReturnType = {
+  comments: PostComment[];
   error: Error | null;
 };
 
@@ -36,9 +45,24 @@ async function getPost(params: GetPostParams): Promise<GetPostReturnType> {
   } else return { post: postMappers.mapPost({}), error: res.error };
 }
 
+async function getPostComments(
+  params: GetPostCommentsParams
+): Promise<GetPostCommentsReturnType> {
+  const res = await api.json<PostComment[]>(
+    API_END_POINTS.post.getPostComments(params)
+  );
+
+  if (res.ok) {
+    const comments = res.result;
+
+    return { comments, error: null };
+  } else return { comments: [], error: res.error };
+}
+
 const postServices = {
   getPosts,
   getPost,
+  getPostComments,
 };
 
 export { postServices };

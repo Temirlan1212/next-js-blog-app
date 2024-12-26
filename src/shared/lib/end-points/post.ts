@@ -12,6 +12,8 @@ export interface GetPostParams {
   postId: number;
 }
 
+export interface GetPostCommentsParams extends GetPostParams {}
+
 const postEndPoints = {
   getPosts: ({ perPage, page, search }: GetPostsParams): string => {
     const params = [];
@@ -39,6 +41,10 @@ const postEndPoints = {
 
   getPost: ({ postId }: GetPostParams): string => {
     return `posts/${postId}`;
+  },
+
+  getPostComments: ({ postId }: GetPostCommentsParams): string => {
+    return `posts/${postId}/comments`;
   },
 };
 

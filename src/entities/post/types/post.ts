@@ -4,3 +4,8 @@ export interface Post {
   title: string;
   body: string;
 }
+
+export interface PostComment extends Omit<Post, "title"> {
+  postId: number;
+  name: string;
+}
