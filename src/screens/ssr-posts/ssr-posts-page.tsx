@@ -18,7 +18,7 @@ export default async function Posts({ searchParams }: PostsProps) {
   });
 
   return (
-    <div className="my-8">
+    <div>
       <h1 className="text-3xl font-bold mb-6">SSR Posts</h1>
       <div className="mb-5">
         <SearchWithLinks defaultValue={searchValue} />

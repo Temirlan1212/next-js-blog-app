@@ -32,7 +32,7 @@ export default function RootLayout({
           <ReactQueryProvider>
             <NextTopLoader />
             <Navbar />
-            <div className="max-w-5xl mx-auto px-5">{children}</div>
+            <div className="max-w-5xl mx-auto px-5 py-10">{children}</div>
             <Toaster />
           </ReactQueryProvider>
         </ThemeProvider>

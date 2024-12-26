@@ -13,7 +13,7 @@ interface PostsProps {
 
 export default async function Posts({ post, comments, user }: PostsProps) {
   return (
-    <div className="my-8">
+    <div>
       <h1 className="text-3xl font-bold mb-6 truncate">Post {post.title}</h1>
 
       <CardTitle className="mt-7">Blog</CardTitle>

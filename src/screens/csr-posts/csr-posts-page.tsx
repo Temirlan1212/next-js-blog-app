@@ -23,7 +23,7 @@ export default function Posts(props: PostsProps) {
   const notFound = posts.length < 1 && !!params.search.value;
 
   return (
-    <div className="my-8">
+    <div>
       <h1 className="text-3xl font-bold mb-6">CSR Posts</h1>
       <div className="mb-5 sticky top-1">
         <SearchBar
