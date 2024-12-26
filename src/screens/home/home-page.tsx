@@ -10,7 +10,16 @@ export interface ComponentProps extends HTMLAttributes<HTMLElement> {}
 export default function Component({ className, ...rest }: ComponentProps) {
   return (
     <div>
-      <CardTitle>Posts carousel</CardTitle>
+      <CardTitle>
+        Posts carousel with{" "}
+        <a
+          target="_blank"
+          href="https://tanstack.com/query/v5/docs/framework/react/overview"
+          className="underline cursor-pointer hover:text-primary"
+        >
+          react-query
+        </a>
+      </CardTitle>
 
       <Separator className="my-5" />
 
