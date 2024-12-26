@@ -28,11 +28,13 @@ import { usePathname, useRouter } from "next/navigation";
 interface RouteProps {
   href: string;
   title: string;
+  target?: React.HTMLAttributeAnchorTarget;
 }
 
 const routeList: RouteProps[] = [
   { href: paths.ssrPosts, title: "SSR posts with pagination" },
   { href: paths.csrPosts, title: "CSR posts with load more" },
+  { href: paths.sitemap, title: "Sitemap.xml", target: "_blank" },
 ];
 
 const logo = {
@@ -113,7 +115,7 @@ export const Navbar = () => {
       <NavigationMenu className="hidden lg:block mx-auto">
         <NavigationMenuList>
           <NavigationMenuItem>
-            {routeList.map(({ href, title }) => (
+            {routeList.map(({ href, title, ...rest }) => (
               <NavigationMenuLink
                 className={cn(
                   "hover:text-primary",
@@ -122,7 +124,11 @@ export const Navbar = () => {
                 key={href}
                 asChild
               >
-                <Link href={href} className="text-base px-2">
+                <Link
+                  href={href}
+                  target={rest?.target}
+                  className="text-base px-2"
+                >
                   {title}
                 </Link>
               </NavigationMenuLink>
