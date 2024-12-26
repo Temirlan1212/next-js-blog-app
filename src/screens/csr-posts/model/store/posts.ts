@@ -105,8 +105,8 @@ const usePostsStore = create<UsePostsStoreProps>()(
 
       setPosts: (v) => set({ posts: v }),
     }),
-    { name: "csr-posts-state" }
-  )
+    { name: "csr-posts-state" },
+  ),
 );
 
 export { usePostsStore };
