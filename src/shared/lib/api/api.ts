@@ -5,7 +5,7 @@ import { ApiResponse } from "./types";
 async function json<T>(
   input: RequestInfo | URL,
   init?: RequestInit,
-  api_url?: string
+  api_url?: string,
 ): Promise<ApiResponse<T>> {
   if (!API_URL) throw new Error("Provide API_URL");
   let response: ApiResponse<T> | null = null;

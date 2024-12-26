@@ -23,7 +23,7 @@ export function PostCarouselCard({
       <Card
         className={cn(
           "w-78 h-52 bg-muted p-3 border-none grow sm:grow-0 hover:shadow-sm hover:bg-muted/[.7] cursor-pointer flex flex-col justify-between gap-2",
-          cardClassName || ""
+          cardClassName || "",
         )}
       >
         <div>

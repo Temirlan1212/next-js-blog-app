@@ -92,7 +92,7 @@ export function CopyButton({
                   code: value,
                 },
               }
-            : undefined
+            : undefined,
         );
         setHasCopied(true);
       }}
@@ -141,7 +141,7 @@ export function CopyWithClassNames({
           variant="ghost"
           className={cn(
             "relative z-10 h-6 w-6 text-zinc-50 hover:bg-zinc-700 hover:text-zinc-50",
-            className
+            className,
           )}
         >
           {hasCopied ? (
@@ -192,7 +192,7 @@ export function CopyNpmCommandButton({
       });
       setHasCopied(true);
     },
-    []
+    [],
   );
 
   return (
@@ -203,7 +203,7 @@ export function CopyNpmCommandButton({
           variant="ghost"
           className={cn(
             "relative z-10 h-6 w-6 text-zinc-50 hover:bg-zinc-700 hover:text-zinc-50",
-            className
+            className,
           )}
         >
           {hasCopied ? (

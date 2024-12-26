@@ -30,7 +30,7 @@ async function getPosts(params: GetPostsParams): Promise<GetPostsReturnType> {
   if (res.ok) {
     const posts = res.result;
     const totalPosts = parseInt(
-      res.response.headers.get("X-Total-Count") || "0"
+      res.response.headers.get("X-Total-Count") || "0",
     );
     return { posts, totalPosts, error: null };
   } else return { posts: [], totalPosts: 0, error: res.error };
@@ -46,10 +46,10 @@ async function getPost(params: GetPostParams): Promise<GetPostReturnType> {
 }
 
 async function getPostComments(
-  params: GetPostCommentsParams
+  params: GetPostCommentsParams,
 ): Promise<GetPostCommentsReturnType> {
   const res = await api.json<PostComment[]>(
-    API_END_POINTS.post.getPostComments(params)
+    API_END_POINTS.post.getPostComments(params),
   );
 
   if (res.ok) {
