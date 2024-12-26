@@ -7,7 +7,6 @@ import {
   GetPostsParams,
 } from "@/shared/lib/end-points/post";
 import { postMappers } from "../lib/mappers";
-import { GetUserParams } from "@/shared/lib/end-points/user";
 
 export type GetPostsReturnType = {
   posts: Post[];
@@ -39,15 +38,6 @@ async function getPosts(params: GetPostsParams): Promise<GetPostsReturnType> {
 
 async function getPost(params: GetPostParams): Promise<GetPostReturnType> {
   const res = await api.json<Post>(API_END_POINTS.post.getPost(params));
-
-  if (res.ok) {
-    const post = res.result;
-    return { post: postMappers.mapPost(post), error: null };
-  } else return { post: postMappers.mapPost({}), error: res.error };
-}
-
-async function getUser(params: GetUserParams): Promise<GetPostReturnType> {
-  const res = await api.json<Post>(API_END_POINTS.user.getUser(params));
 
   if (res.ok) {
     const post = res.result;
