@@ -1,8 +1,9 @@
 import { CSRPostsPage } from "@/screens/csr-posts";
 
 export const metadata = {
-  title: "CSR Posts",
-  description: "CSR Posts",
+  title: "Client-side Rendered Posts",
+  description:
+    " Discover client-side rendered posts enhanced with infinite scroll and efficient Zustand state management, ensuring a smooth and dynamic browsing experience.",
 };
 
 interface Props {

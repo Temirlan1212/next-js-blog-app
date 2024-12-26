@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { SearchBar } from "@/shared/ui/search-bar";
 import { Button } from "@/shared/ui/button";
 import { postsSelectors } from "./model/selectors/posts";
+import { CardDescription } from "@/shared/ui/card";
 
 interface PostsProps {}
 export default function Posts(props: PostsProps) {
@@ -24,7 +25,14 @@ export default function Posts(props: PostsProps) {
 
   return (
     <div>
-      <h1 className="text-3xl font-bold mb-6">CSR Posts</h1>
+      <h1 className="text-3xl font-bold mb-2">Client-side Rendered Posts</h1>
+      <CardDescription className="text-xl mb-6">
+        Discover client-side rendered posts enhanced with{" "}
+        <span className="underline">infinite scroll</span> and efficient{" "}
+        <span className="underline">Zustand state management</span>, ensuring a
+        smooth and dynamic browsing experience.
+      </CardDescription>
+
       <div className="mb-5 sticky top-1">
         <SearchBar
           loading={loading === "loading"}
@@ -43,7 +51,7 @@ export default function Posts(props: PostsProps) {
 
       {notFound && <div className="w-full text-center">Not found.</div>}
 
-      {!notFound && !meta.isLastPage && (
+      {!notFound && !meta.isLastPage && posts.length > 0 && (
         <div className="w-full flex justify-center">
           <Button
             className="mt-5 px-7"
