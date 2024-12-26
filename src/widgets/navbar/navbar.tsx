@@ -82,7 +82,7 @@ export const Navbar = () => {
                 </SheetTitle>
               </SheetHeader>
 
-              <div className="flex flex-col gap-2">
+              <div className="flex flex-col gap-4 mt-10">
                 {routeList.map(({ href, title }) => (
                   <Button
                     key={href}
@@ -92,11 +92,11 @@ export const Navbar = () => {
                     }}
                     variant="ghost"
                     className={cn(
-                      "hover:text-primary justify-start text-base",
-                      checkIsActive(pathname, href) && "text-primary",
+                      "hover:text-primary justify-start bg-accent/[.5]",
+                      checkIsActive(pathname, href) && "text-primary"
                     )}
                   >
-                    {title}
+                    <span className=" truncate text-start">{title}</span>
                   </Button>
                 ))}
               </div>
@@ -119,7 +119,7 @@ export const Navbar = () => {
               <NavigationMenuLink
                 className={cn(
                   "hover:text-primary",
-                  checkIsActive(pathname, href) && "text-primary",
+                  checkIsActive(pathname, href) && "text-primary"
                 )}
                 key={href}
                 asChild
