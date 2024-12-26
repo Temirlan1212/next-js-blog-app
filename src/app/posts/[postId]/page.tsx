@@ -6,9 +6,31 @@ import {
   GetPostParams,
 } from "@/shared/lib/end-points/post";
 
-export const metadata = {
-  title: "Post",
-  description: "Post",
+export const generateMetadata = async ({ params }: Props) => {
+  const postId = parseInt((params?.postId as unknown as string) || "0");
+  const { post } = await postServices.getPost({ postId });
+
+  return {
+    title: `${post.title} - Blog Post`,
+    description: post.body.slice(0, 160),
+    openGraph: {
+      title: post.title,
+      description: post.body,
+      url: `${process.env.NEXT_PUBLIC_URL}/posts/${postId}`,
+      type: "article",
+    },
+    twitter: {
+      title: post.title,
+      description: post.body,
+    },
+  };
+};
+
+export const generateStaticParams = async () => {
+  const { posts } = await postServices.getPosts({});
+  return posts.map((post) => ({
+    postId: post.id.toString(),
+  }));
 };
 
 interface Props {
@@ -18,13 +40,9 @@ interface Props {
 export default async function Page({ params }: Props) {
   const postId = parseInt((params?.postId as unknown as string) || "0");
 
-  const { post } = await postServices.getPost({
-    postId,
-  });
+  const { post } = await postServices.getPost({ postId });
 
-  const { comments } = await postServices.getPostComments({
-    postId,
-  });
+  const { comments } = await postServices.getPostComments({ postId });
 
   const { user } = await userServices.getUser({
     userId: post.userId,
