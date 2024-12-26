@@ -13,7 +13,6 @@ async function json<T>(
   let url = `${API_URL}/${input}`;
 
   const requestInit: RequestInit = {
-    cache: "no-cache",
     ...init,
     headers: {
       ...(init?.headers || {}),
