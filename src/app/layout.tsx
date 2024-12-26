@@ -30,7 +30,7 @@ export default function RootLayout({
         >
           <ReactQueryProvider>
             <NextTopLoader />
-            <div className="max-w-4xl mx-auto">{children}</div>
+            <div className="max-w-5xl mx-auto px-5">{children}</div>
             <Toaster />
           </ReactQueryProvider>
         </ThemeProvider>
