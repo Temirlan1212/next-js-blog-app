@@ -1,4 +1,5 @@
 import { postServices } from "@/entities/post/api/services";
+import { userServices } from "@/entities/user";
 import { PostPage } from "@/screens/post";
 import {
   GetPostCommentsParams,
@@ -25,5 +26,9 @@ export default async function Page({ params }: Props) {
     postId,
   });
 
-  return <PostPage post={post} comments={comments} />;
+  const { user } = await userServices.getUser({
+    userId: post.userId,
+  });
+
+  return <PostPage post={post} comments={comments} user={user} />;
 }
