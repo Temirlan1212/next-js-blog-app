@@ -17,7 +17,10 @@ import Link from "next/link";
 
 export interface PostsCarouselProps extends HTMLAttributes<HTMLElement> {}
 
-export function PostsCarousel({ className, ...rest }: PostsCarouselProps) {
+export default function PostsCarousel({
+  className,
+  ...rest
+}: PostsCarouselProps) {
   const getPostsQuery = postQueries.useGetPosts({});
   const { data } = getPostsQuery;
 

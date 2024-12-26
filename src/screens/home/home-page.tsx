@@ -1,9 +1,15 @@
 import * as React from "react";
 import { HTMLAttributes } from "react";
-import { PostsCarousel } from "./posts-carousel";
 import { CardTitle } from "@/shared/ui/card";
 import { Separator } from "@/shared/ui/separator";
-import { RecentPosts } from "./recent-posts";
+import dynamic from "next/dynamic";
+import { Button } from "@/shared/ui/button";
+import { ArrowRight } from "lucide-react";
+import Link from "next/link";
+import { paths } from "@/shared/routing";
+
+const PostsCarousel = dynamic(() => import("./posts-carousel"));
+const RecentPosts = dynamic(() => import("./recent-posts"));
 
 export interface ComponentProps extends HTMLAttributes<HTMLElement> {}
 
@@ -25,7 +31,19 @@ export default function Component({ className, ...rest }: ComponentProps) {
 
       <PostsCarousel />
 
-      <CardTitle className="mt-16">Recent 20 posts</CardTitle>
+      <div className="flex items-center justify-between mt-16">
+        <CardTitle>Recent 20 posts</CardTitle>
+        <Link href={paths.csrPosts}>
+          <Button
+            className="group"
+            rightIcon={
+              <ArrowRight className="size-5 ml-2 group-hover/arrow:translate-x-1 transition-transform" />
+            }
+          >
+            See all
+          </Button>
+        </Link>
+      </div>
 
       <Separator className="my-5" />
 

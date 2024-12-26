@@ -7,7 +7,7 @@ export interface RecentPostsProps {
   params: GetPostsParams;
 }
 
-export async function RecentPosts({ params }: RecentPostsProps) {
+export default async function RecentPosts({ params }: RecentPostsProps) {
   const { posts } = await postServices.getPosts({
     page: params?.page || 1,
     perPage: params?.perPage || 10,
