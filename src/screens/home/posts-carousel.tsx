@@ -14,6 +14,7 @@ import { postQueries } from "@/entities/post/api/queries";
 import { PostCarouselCard } from "./post-carousel-card";
 import { Button } from "@/shared/ui/button";
 import Link from "next/link";
+import { useIsMobile } from "@/shared/lib/hooks/use-mobile";
 
 export interface PostsCarouselProps extends HTMLAttributes<HTMLElement> {}
 
@@ -21,6 +22,7 @@ export default function PostsCarousel({
   className,
   ...rest
 }: PostsCarouselProps) {
+  const isMobile = useIsMobile();
   const getPostsQuery = postQueries.useGetPosts({});
   const { data } = getPostsQuery;
 
@@ -48,8 +50,12 @@ export default function PostsCarousel({
           </CarouselItem>
         ))}
       </CarouselContent>
-      <CarouselPrevious />
-      <CarouselNext />
+      {!isMobile && (
+        <>
+          <CarouselPrevious />
+          <CarouselNext />
+        </>
+      )}
     </Carousel>
   );
 }
