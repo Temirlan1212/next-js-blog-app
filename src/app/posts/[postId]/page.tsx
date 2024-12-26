@@ -6,6 +6,10 @@ import {
   GetPostParams,
 } from "@/shared/lib/end-points/post";
 
+interface Props {
+  params: GetPostParams | GetPostCommentsParams;
+}
+
 export const generateMetadata = async ({ params }: Props) => {
   const postId = parseInt((params?.postId as unknown as string) || "0");
   const { post } = await postServices.getPost({ postId });
@@ -32,10 +36,6 @@ export const generateStaticParams = async () => {
     postId: post.id.toString(),
   }));
 };
-
-interface Props {
-  params: GetPostParams | GetPostCommentsParams;
-}
 
 export default async function Page({ params }: Props) {
   const postId = parseInt((params?.postId as unknown as string) || "0");
