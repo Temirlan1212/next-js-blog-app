@@ -6,6 +6,8 @@ import { SearchBar } from "@/shared/ui/search-bar";
 import { Button } from "@/shared/ui/button";
 import { postsSelectors } from "./model/selectors/posts";
 import { CardDescription } from "@/shared/ui/card";
+import { useDebounce } from "use-debounce";
+import { useIsMounted } from "@/shared/lib/hooks/useIsMounted";
 
 interface PostsProps {}
 export default function Posts(props: PostsProps) {
@@ -17,6 +19,13 @@ export default function Posts(props: PostsProps) {
   const meta = usePostsStore(postsSelectors.selectMeta);
   const loading = usePostsStore(postsSelectors.selectLoading);
   const reset = usePostsStore(postsSelectors.selectReset);
+  const { isMounted } = useIsMounted();
+
+  const [value] = useDebounce(params.search.value, 600);
+
+  useEffect(() => {
+    if (isMounted) mutatePosts("loading");
+  }, [value]);
 
   useEffect(() => {
     mutatePosts("init-loading");
@@ -47,15 +56,14 @@ export default function Posts(props: PostsProps) {
       <div className="mb-5 sticky top-1">
         <SearchBar
           loading={loading === "loading"}
-          onDebounceChange={(v) => {
-            setParams({
-              search: { fields: params.search?.fields || [], value: v },
-            });
-            mutatePosts("loading");
-          }}
           inputProps={{
             placeholder: "Search...",
-            defaultValue: params.search.value,
+            value: params.search.value,
+            onValueChange: (v) => {
+              setParams({
+                search: { fields: params.search?.fields || [], value: v },
+              });
+            },
           }}
         />
       </div>

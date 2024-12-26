@@ -13,6 +13,8 @@ export interface SearchBarProps {
   className?: string;
   inputProps: Pick<InputProps, "placeholder" | "className"> & {
     defaultValue?: string;
+    value?: string;
+    onValueChange?: (v: string) => void;
   };
 }
 
@@ -54,8 +56,12 @@ export function SearchBar({
         </div>
         <Input
           type="search"
-          value={text}
-          onChange={(event) => setText(event.target.value)}
+          value={inputProps.onValueChange ? inputProps.value : text}
+          onChange={(event) =>
+            inputProps.onValueChange
+              ? inputProps.onValueChange(event.target.value)
+              : setText(event.target.value)
+          }
           {...inputProps}
           className={cn("ps-10", inputProps.className)}
           tabIndex={-1}

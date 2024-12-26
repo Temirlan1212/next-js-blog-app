@@ -26,7 +26,6 @@ export function SearchWithLinks({ defaultValue }: SearchWithLinks) {
 
   const buildLink = (value: string) => {
     const key = "search";
-    if (!searchParams) return `${pathname}?${key}=${value}`;
     const newSearchParams = new URLSearchParams(searchParams);
     newSearchParams.set(key, String(value));
     return `${pathname}?${newSearchParams.toString()}`;
@@ -38,8 +37,8 @@ export function SearchWithLinks({ defaultValue }: SearchWithLinks) {
         className="w-full"
         debounceDelay={0}
         onDebounceChange={(v) => {
-          if (v) setValue(v);
-          else setSearchValue("");
+          setValue(v);
+          if (!v) setSearchValue("");
         }}
         inputProps={{ placeholder: "Search...", defaultValue: defaultValue }}
       />
