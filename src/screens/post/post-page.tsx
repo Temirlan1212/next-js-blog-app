@@ -22,7 +22,7 @@ export default async function Posts({ post, comments, user }: PostsProps) {
 
       <PostCard post={post} />
 
-      <CardTitle className="mt-7">User</CardTitle>
+      <CardTitle className="mt-7">Author</CardTitle>
 
       <div className="border-b my-5" />
 
