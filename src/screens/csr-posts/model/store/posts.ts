@@ -3,8 +3,7 @@ import { Post } from "@/entities/post/types";
 import { PostParams } from "@/shared/lib/end-points/post";
 import { LoadingStatus } from "@/shared/lib/types";
 import { create } from "zustand";
-
-export const searchFields = ["title_like"];
+import { persist } from "zustand/middleware";
 
 export interface UsePostsStoreProps {
   loading: LoadingStatus;
@@ -16,69 +15,98 @@ export interface UsePostsStoreProps {
   mutatePosts: (l: LoadingStatus) => void;
   loadMorePosts: () => void;
   getPosts: (l: LoadingStatus) => Promise<GetPostsReturnType>;
+  reset: () => void;
   meta: {
     totalPosts: number;
     isLastPage: boolean;
   };
 }
 
-const usePostsStore = create<UsePostsStoreProps>()((set, get) => ({
-  loading: "init",
-  setLoading: (v) => set({ loading: v }),
-
+export const defaultData = {
+  loading: "init" as LoadingStatus,
+  posts: [],
   meta: {
     totalPosts: 0,
     isLastPage: false,
   },
-
   params: {
     page: 1,
     perPage: 10,
-    search: { fields: searchFields, value: "" },
+    search: { fields: ["title_like"], value: "" },
   },
+};
 
-  setParams: (v) => {
-    return set((state) => ({
-      params: { ...state.params, ...v },
-    }));
-  },
+const usePostsStore = create<UsePostsStoreProps>()(
+  persist(
+    (set, get) => ({
+      loading: defaultData.loading,
 
-  getPosts: async (loading) => {
-    const { params, setLoading } = get();
+      reset: () => {
+        set({ ...defaultData });
+        get().mutatePosts("init-loading");
+      },
 
-    setLoading(loading);
-    const onFinally = () => setLoading("loaded");
+      setLoading: (v) => set({ loading: v }),
 
-    return await postServices.getPosts(params).finally(onFinally);
-  },
+      posts: defaultData.posts,
 
-  mutatePosts: async (loading) => {
-    const { setPosts, getPosts, params } = get();
+      meta: defaultData.meta,
 
-    const { posts, totalPosts } = await getPosts(loading);
+      params: defaultData.params,
 
-    const isLastPage = params.page * params.perPage >= totalPosts;
-    set({ meta: { isLastPage, totalPosts } });
+      setParams: (v) => {
+        return set((state) => ({
+          params: { ...state.params, ...v },
+        }));
+      },
 
-    setPosts(posts);
+      getPosts: async (loading) => {
+        const { params, setLoading } = get();
 
-    return posts;
-  },
+        setLoading(loading);
+        const onFinally = () => setLoading("loaded");
 
-  loadMorePosts: async () => {
-    const { params, setParams, setPosts, posts: prevPosts, getPosts } = get();
-    setParams({ page: params.page + 1 });
-    const { posts, totalPosts } = await getPosts("loading");
+        return await postServices.getPosts(params).finally(onFinally);
+      },
 
-    const isLastPage =
-      params.page * params.perPage + params.perPage >= totalPosts;
-    set({ meta: { isLastPage, totalPosts } });
+      mutatePosts: async (loading) => {
+        const { setPosts, getPosts, params, posts: prevPosts } = get();
 
-    setPosts([...prevPosts, ...posts]);
-  },
+        if (loading === "init-loading" && prevPosts.length > 0)
+          return prevPosts;
 
-  posts: [],
-  setPosts: (v) => set({ posts: v }),
-}));
+        const { posts, totalPosts } = await getPosts(loading);
+
+        const isLastPage = params.page * params.perPage >= totalPosts;
+        set({ meta: { isLastPage, totalPosts } });
+
+        setPosts(posts);
+
+        return posts;
+      },
+
+      loadMorePosts: async () => {
+        const {
+          params,
+          setParams,
+          setPosts,
+          posts: prevPosts,
+          getPosts,
+        } = get();
+        setParams({ page: params.page + 1 });
+        const { posts, totalPosts } = await getPosts("loading");
+
+        const isLastPage =
+          params.page * params.perPage + params.perPage >= totalPosts;
+        set({ meta: { isLastPage, totalPosts } });
+
+        setPosts([...prevPosts, ...posts]);
+      },
+
+      setPosts: (v) => set({ posts: v }),
+    }),
+    { name: "csr-posts-state" }
+  )
+);
 
 export { usePostsStore };

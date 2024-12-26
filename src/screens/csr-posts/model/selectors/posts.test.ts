@@ -1,22 +1,19 @@
 import { postsSelectors } from "./posts"; // Adjust the import path accordingly
-import { UsePostsStoreProps } from "../store/posts"; // Adjust the import path
+import { defaultData, UsePostsStoreProps } from "../store/posts"; // Adjust the import path
 
 describe("postsSelectors", () => {
   const mockState: UsePostsStoreProps = {
     loading: "init",
     setLoading: jest.fn(),
-    params: {
-      page: 1,
-      perPage: 10,
-      search: { fields: ["title_like"], value: "" },
-    },
+    params: defaultData.params,
     setParams: jest.fn(),
     posts: [],
     setPosts: jest.fn(),
     mutatePosts: jest.fn(),
     loadMorePosts: jest.fn(),
     getPosts: jest.fn(),
-    meta: { totalPosts: 100, isLastPage: false },
+    meta: defaultData.meta,
+    reset: jest.fn(),
   };
 
   it("selects loading correctly", () => {
@@ -67,5 +64,10 @@ describe("postsSelectors", () => {
   it("selects meta correctly", () => {
     const meta = postsSelectors.selectMeta(mockState);
     expect(meta).toEqual(mockState.meta);
+  });
+
+  it("selects reset correctly", () => {
+    const reset = postsSelectors.selectReset(mockState);
+    expect(reset).toBe(mockState.reset);
   });
 });

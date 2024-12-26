@@ -11,6 +11,7 @@ const postsSelectors = {
   selectLoadMorePosts: (state: UsePostsStoreProps) => state.loadMorePosts,
   selectGetPosts: (state: UsePostsStoreProps) => state.getPosts,
   selectMeta: (state: UsePostsStoreProps) => state.meta,
+  selectReset: (state: UsePostsStoreProps) => state.reset,
 };
 
 export { postsSelectors };

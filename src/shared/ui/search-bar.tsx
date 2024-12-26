@@ -1,6 +1,6 @@
 "use client";
 import { Input, InputProps } from "@/ui/input";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDebounce } from "use-debounce";
 import { Button } from "@/ui/button";
 import { Search } from "lucide-react";
@@ -23,6 +23,7 @@ export function SearchBar({
   className,
   inputProps,
 }: SearchBarProps) {
+  const isDefaultValueSet = useRef(false);
   const [didMount, setDidMount] = useState(false);
   const [text, setText] = useState(inputProps.defaultValue || "");
   const [value] = useDebounce(text, debounceDelay);
@@ -34,6 +35,13 @@ export function SearchBar({
   useEffect(() => {
     if (didMount && onDebounceChange) onDebounceChange(value);
   }, [value]);
+
+  useEffect(() => {
+    if (inputProps?.defaultValue && !isDefaultValueSet.current) {
+      setText(inputProps.defaultValue);
+      isDefaultValueSet.current = true;
+    }
+  }, [isDefaultValueSet.current, inputProps?.defaultValue]);
 
   return (
     <div className={cn("mx-0", className)}>

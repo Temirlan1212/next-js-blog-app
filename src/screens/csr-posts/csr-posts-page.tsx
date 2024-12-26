@@ -16,6 +16,7 @@ export default function Posts(props: PostsProps) {
   const params = usePostsStore(postsSelectors.selectParams);
   const meta = usePostsStore(postsSelectors.selectMeta);
   const loading = usePostsStore(postsSelectors.selectLoading);
+  const reset = usePostsStore(postsSelectors.selectReset);
 
   useEffect(() => {
     mutatePosts("init-loading");
@@ -33,6 +34,16 @@ export default function Posts(props: PostsProps) {
         smooth and dynamic browsing experience.
       </CardDescription>
 
+      <div className="w-full flex justify-end">
+        <Button
+          variant="destructive"
+          className="flex gap-1 items-center mb-6"
+          onClick={reset}
+        >
+          Reset zustand store to default state
+        </Button>
+      </div>
+
       <div className="mb-5 sticky top-1">
         <SearchBar
           loading={loading === "loading"}
@@ -42,7 +53,10 @@ export default function Posts(props: PostsProps) {
             });
             mutatePosts("loading");
           }}
-          inputProps={{ placeholder: "Search..." }}
+          inputProps={{
+            placeholder: "Search...",
+            defaultValue: params.search.value,
+          }}
         />
       </div>
 
