@@ -32,8 +32,8 @@ const postEndPoints = {
     if (isSearch) {
       search.fields.map((field) =>
         params.push(
-          `${encodeURIComponent(field)}=${encodeURIComponent(search.value)}`
-        )
+          `${encodeURIComponent(field)}=${encodeURIComponent(search.value)}`,
+        ),
       );
     }
 

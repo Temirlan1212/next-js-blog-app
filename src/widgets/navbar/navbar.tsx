@@ -93,7 +93,7 @@ export const Navbar = () => {
                     variant="ghost"
                     className={cn(
                       "hover:text-primary justify-start text-base",
-                      checkIsActive(pathname, href) && "text-primary"
+                      checkIsActive(pathname, href) && "text-primary",
                     )}
                   >
                     {title}
@@ -119,7 +119,7 @@ export const Navbar = () => {
               <NavigationMenuLink
                 className={cn(
                   "hover:text-primary",
-                  checkIsActive(pathname, href) && "text-primary"
+                  checkIsActive(pathname, href) && "text-primary",
                 )}
                 key={href}
                 asChild
