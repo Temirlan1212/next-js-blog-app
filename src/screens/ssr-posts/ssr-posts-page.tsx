@@ -20,7 +20,7 @@ export default async function Posts({ searchParams }: PostsProps) {
 
   return (
     <div>
-      <h1 className="text-3xl font-bold mb-2">SSR Posts</h1>
+      <h1 className="text-3xl font-bold mb-2">Server-side Rendered Posts</h1>
       <CardDescription className="text-xl mb-6">
         Experience seamless server-side rendering with full support for{" "}
         <span className="underline">search</span> and{" "}

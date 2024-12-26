@@ -9,8 +9,9 @@ const fakeRequest = (data: any) => {
 };
 
 export const metadata = {
-  title: "SSR Posts",
-  description: "SSR Posts",
+  title: "Server-side Rendered Posts",
+  description:
+    "Experience seamless server-side rendering with full support for search and pagination",
 };
 
 interface Props {
