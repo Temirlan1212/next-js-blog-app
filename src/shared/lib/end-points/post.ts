@@ -8,6 +8,10 @@ export interface PostParams {
 }
 export interface GetPostsParams extends Partial<PostParams> {}
 
+export interface GetPostParams {
+  postId: number;
+}
+
 const postEndPoints = {
   getPosts: ({ perPage, page, search }: GetPostsParams): string => {
     const params = [];
@@ -31,6 +35,10 @@ const postEndPoints = {
     }
 
     return `posts?${params.join("&")}`;
+  },
+
+  getPost: ({ postId }: GetPostParams): string => {
+    return `posts/${postId}`;
   },
 };
 
