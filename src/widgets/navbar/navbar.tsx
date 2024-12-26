@@ -19,8 +19,10 @@ import {
 import { Button } from "@/ui/button";
 import Link from "next/link";
 import { ToggleTheme } from "./toogle-theme";
-import { paths } from "@/shared/routing";
+import { checkIsActive, paths } from "@/shared/routing";
 import { CONTACTS } from "@/shared/constants";
+import { cn } from "@/shared/lib/classnames";
+import { usePathname } from "next/navigation";
 
 interface RouteProps {
   href: string;
@@ -28,11 +30,12 @@ interface RouteProps {
 }
 
 const routeList: RouteProps[] = [
-  { href: paths.ssrPosts, title: "SSR posts" },
-  { href: paths.csrPosts, title: "CSR posts" },
+  { href: paths.ssrPosts, title: "SSR posts with pagination" },
+  { href: paths.csrPosts, title: "CSR posts with load more" },
 ];
 
 export const Navbar = () => {
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = React.useState(false);
   return (
     <header className="shadow-inner bg-opacity-15 w-full mx-auto sticky top-0 z-40 flex justify-between items-center p-2 bg-card">
@@ -93,7 +96,14 @@ export const Navbar = () => {
         <NavigationMenuList>
           <NavigationMenuItem>
             {routeList.map(({ href, title }) => (
-              <NavigationMenuLink key={href} asChild>
+              <NavigationMenuLink
+                className={cn(
+                  "hover:text-primary",
+                  checkIsActive(pathname, href) && "text-primary"
+                )}
+                key={href}
+                asChild
+              >
                 <Link href={href} className="text-base px-2">
                   {title}
                 </Link>
